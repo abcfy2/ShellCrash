@@ -21,7 +21,7 @@ prepare_clash_base_config() {
             if [ -n "$ecs_address" ];then
                 dns_fallback=$(echo "$dns_fallback, " | sed "s|, |#ecs-override=true\&ecs=$ecs_address, |g" | sed 's|, $||')
             else
-                logger "自动获取ecs网段失败！"
+                logger "自动获取ecs网段失败！" 33
             fi
         }
     }

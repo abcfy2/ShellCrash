@@ -112,7 +112,11 @@ prepare_dns_config() {
     #ecs优化
     [ "$ecs_subnet" = ON ] && {
         . "$CRASHDIR"/libs/get_ecsip.sh
-        client_subnet='"client_subnet": "'"$ecs_address"'",'
+        if [ -n "$ecs_address" ]; then
+            client_subnet='"client_subnet": "'"$ecs_address"'",'
+        else
+            logger "自动获取ecs网段失败！" 33
+        fi
     }
     #根据dns模式生成
     [ "$dns_mod" = "redir_host" ] && {
